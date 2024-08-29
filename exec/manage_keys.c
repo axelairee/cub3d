@@ -6,7 +6,7 @@
 /*   By: abolea <abolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 12:43:08 by abolea            #+#    #+#             */
-/*   Updated: 2024/08/29 15:28:43 by abolea           ###   ########.fr       */
+/*   Updated: 2024/08/29 15:39:46 by abolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,15 @@ int	update_position(t_mlx *mlx)
 	return (0);
 }
 
-void	free_all()
+void	free_all(t_mlx *mlx, t_cam *cam)
 {
-	
+	free(mlx->mlx_ptr);	
+	free(cam);
 }
 
 int	handle_exit(t_mlx *mlx)
 {
+	free_all(mlx, mlx->cam);
 	mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
 	exit(0);
 	return (0);
