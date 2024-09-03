@@ -6,7 +6,7 @@
 /*   By: abolea <abolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:23:06 by abolea            #+#    #+#             */
-/*   Updated: 2024/09/03 13:54:48 by abolea           ###   ########.fr       */
+/*   Updated: 2024/09/03 14:00:33 by abolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void	free_all(t_mlx *mlx, t_cam *cam)
 int	handle_exit(t_mlx *mlx)
 {
 	free_all(mlx, mlx->cam);
+	free_cube(mlx->cub);
 	exit(0);
 	return (0);
 }

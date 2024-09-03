@@ -6,19 +6,19 @@
 /*   By: abolea <abolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 13:12:19 by lle-pier          #+#    #+#             */
-/*   Updated: 2024/09/03 13:22:50 by abolea           ###   ########.fr       */
+/*   Updated: 2024/09/03 14:18:41 by abolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <errno.h>
-#include <string.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include <unistd.h>
+# include <errno.h>
+# include <string.h>
 # include "../minilibx-linux/mlx.h"
 # include <math.h>
 
@@ -60,30 +60,31 @@ typedef struct s_cub
 	t_pos	player;
 }			t_cub;
 
-typedef struct s_img {
-	void	*img;
-	char	*data;
-	int		bpp;
-	int		tex_bpp;
-	int		line_length;
-	int		tex_line_length;
-	int		endian;
-	int		tex_endian;
-	int		width;
-	int		tex_width;
-	int		height;
-	int		tex_height;
-	void	*img_ptr;
-	void	*tex_ptr;
-	void	*tex_data;
-	int		pos;
-	struct s_img *north;
-	struct s_img *south;
-	struct s_img *east;
-	struct s_img *west;
+typedef struct s_img
+{
+	void			*img;
+	char			*data;
+	int				bpp;
+	int				tex_bpp;
+	int				line_length;
+	int				tex_line_length;
+	int				endian;
+	int				tex_endian;
+	int				width;
+	int				tex_width;
+	int				height;
+	int				tex_height;
+	void			*img_ptr;
+	void			*tex_ptr;
+	void			*tex_data;
+	int				pos;
+	struct s_img	*north;
+	struct s_img	*south;
+	struct s_img	*east;
+	struct s_img	*west;
 }	t_img;
 
-typedef enum e_cardinal_direction 
+typedef enum e_cardinal_direction
 {
 	NORTH = 0,
 	SOUTH = 1,
@@ -91,7 +92,8 @@ typedef enum e_cardinal_direction
 	EAST = 3
 }	t_cardinal_direction;
 
-typedef	struct s_keys {
+typedef struct s_keys
+{
 	int	w;
 	int	a;
 	int	s;
@@ -100,7 +102,8 @@ typedef	struct s_keys {
 	int	fd;
 }	t_keys;
 
-typedef struct s_cam {
+typedef struct s_cam
+{
 	double	pos_x; //position x du joueur
 	double	pos_y; //position y du joueur
 	double	cam_x; //coordonne x du rayon dans l espace de la camera
@@ -140,16 +143,17 @@ typedef struct s_cam {
 	double	tex_pos;
 	double	step;
 	t_keys	keys;
-} t_cam;
+}	t_cam;
 
-typedef struct s_mlx {
+typedef struct s_mlx
+{
 	void	*mlx_ptr;
 	void	*win_ptr;
 	void	*xpm_ptr;
 	t_cam	*cam;
 	t_img	img;
-	t_cub	cub;
-} t_mlx;
+	t_cub	*cub;
+}	t_mlx;
 
 char	*ft_strchr(const char *s, int c);
 ssize_t	ft_strlen(const char *s);
@@ -157,7 +161,8 @@ void	print_error(const char *msg);
 int		is_cub_file(const char *filename);
 int		is_valid_line(const char *line);
 int		is_valid_map(const char *line);
-int		check_first_param(int linesRead, ssize_t bytesRead, int fd, char *buffer);
+int		check_first_param(int linesRead, \
+ssize_t bytesRead, int fd, char *buffer);
 int		process_line(t_cub *cub, const char *line);
 void	process_map_line(t_cub *cub, const char *line, int row);
 int		fill_cub_structure(t_cub *cub, const char *filename);
@@ -198,6 +203,6 @@ t_cam	*init_argument(t_cub *cub);
 int		init_textures(t_mlx *mlx, t_cub *cub);
 int		handle_exit(t_mlx *mlx);
 void	free_all(t_mlx *mlx, t_cam *cam);
-int		init_mlx(t_mlx *mlx);
+int		init_mlx(t_mlx *mlx, t_cub *cub);
 
 #endif

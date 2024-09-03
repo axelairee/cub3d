@@ -6,7 +6,7 @@
 /*   By: abolea <abolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 12:41:28 by lle-pier          #+#    #+#             */
-/*   Updated: 2024/09/03 13:09:08 by abolea           ###   ########.fr       */
+/*   Updated: 2024/09/03 13:59:54 by abolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	free_cube(t_cub *cub)
 	int	i;
 
 	i = 0;
+	if (!cub)
+		return;
 	free(cub->no);
 	free(cub->so);
 	free(cub->we);
@@ -97,8 +99,6 @@ int	main(int argc, char *argv[])
 	cub.we_state = 0;
 	cub.floor_state = 0;
 	cub.ceiling_state = 0;
-	printf("c = %d\n", cub.ceiling_state);
-	printf("f = %d\n", cub.floor_state);
 	if (basic_errors(filename) == 1)
 		return (1);
 	if (fill_cub_structure(&cub, filename) != 0)

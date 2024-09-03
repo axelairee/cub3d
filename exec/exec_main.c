@@ -6,7 +6,7 @@
 /*   By: abolea <abolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 11:06:52 by abolea            #+#    #+#             */
-/*   Updated: 2024/09/03 13:24:09 by abolea           ###   ########.fr       */
+/*   Updated: 2024/09/03 14:10:55 by abolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	exec_main(t_cub *cub)
 	t_mlx	mlx;
 	t_cam	*cam;
 
-	if (init_mlx(&mlx) == -1)
+	if (init_mlx(&mlx, cub) == -1)
 		return (-1);
 	cam = init_argument(cub);
 	if (!cam)

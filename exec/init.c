@@ -67,10 +67,7 @@ t_cam	*init_argument(t_cub *cub)
 
 	cam = malloc(sizeof(t_cam));
 	if (!cam)
-	{
-		free(cam);
-		exit(1);
-	}
+		return (NULL);
 	cam->map = cub->map;
 	cam->pos_y = cub->player.x + 0.5;
 	cam->pos_x = cub->player.y + 0.5;
@@ -89,7 +86,7 @@ t_cam	*init_argument(t_cub *cub)
 	return (cam);
 }
 
-int	init_mlx(t_mlx *mlx)
+int	init_mlx(t_mlx *mlx, t_cub *cub)
 {
 	mlx->mlx_ptr = mlx_init();
 	if (!mlx->mlx_ptr)
@@ -108,5 +105,6 @@ int	init_mlx(t_mlx *mlx)
 		free(mlx->mlx_ptr);
 		return (-1);
 	}
+	mlx->cub = cub;
 	return (0);
 }
