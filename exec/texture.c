@@ -6,7 +6,7 @@
 /*   By: abolea <abolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:06:20 by abolea            #+#    #+#             */
-/*   Updated: 2024/08/29 13:57:08 by abolea           ###   ########.fr       */
+/*   Updated: 2024/09/03 13:22:25 by abolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,41 @@ void	put_wall(t_cam *cam, t_img *img)
 	}
 }
 
-void	create_image(t_img *img, t_mlx *mlx)
+int	create_image(t_img *img, t_mlx *mlx)
 {
 	img->img_ptr = mlx_new_image(mlx->mlx_ptr, SCREEN_W, SCREEN_H);
 	if (!img->img_ptr)
-		return ;
+		return (-1);
 	img->data = mlx_get_data_addr(img->img_ptr, \
 	&img->bpp, &img->line_length, &img->endian);
+	if (!img->data)
+		return (-1);
+	return (0);
+}
+
+int	init_textures(t_mlx *mlx, t_cub *cub)
+{
+	mlx->img.north = malloc(sizeof(t_img));
+	if (!mlx->img.north)
+		return (-1);
+	mlx->img.south = malloc(sizeof(t_img));
+	if (!mlx->img.north)
+		return (-1);
+	mlx->img.east = malloc(sizeof(t_img));
+	if (!mlx->img.north)
+		return (-1);
+	mlx->img.west = malloc(sizeof(t_img));
+	if (!mlx->img.north)
+		return (-1);
+	if (!mlx->img.north || !mlx->img.south || !mlx->img.east || !mlx->img.west)
+		return (-1);
+	if (load_textures(mlx->img.north, mlx, cub->no) == -1)
+		return (-1);
+	if (load_textures(mlx->img.south, mlx, cub->so) == -1)
+		return (-1);
+	if (load_textures(mlx->img.east, mlx, cub->ea) == -1)
+		return (-1);
+	if (load_textures(mlx->img.west, mlx, cub->we) == -1)
+		return (-1);
+	return (0);
 }

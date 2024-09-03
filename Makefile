@@ -15,7 +15,8 @@ SRCS			=   parsing/check_map.c \
 					exec/utils.c \
 					exec/cam.c \
 					exec/draw.c \
-					exec/init.c
+					exec/init.c \
+					exec/free_all.c
 
 OBJS			=	$(addprefix .build/, $(SRCS:.c=.o))
 

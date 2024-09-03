@@ -6,7 +6,7 @@
 /*   By: abolea <abolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 12:41:28 by lle-pier          #+#    #+#             */
-/*   Updated: 2024/09/03 12:47:25 by abolea           ###   ########.fr       */
+/*   Updated: 2024/09/03 13:09:08 by abolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	main(int argc, char *argv[])
 	if (test_path(&cub) == 1)
 		return (free_cube(&cub), 1);
 	print_cube(&cub);
-	exec_main(&cub);
-	free_cube(&cub);
+	if (exec_main(&cub) == -1)
+		free_cube(&cub);
 	return (0);
 }

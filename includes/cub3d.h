@@ -6,7 +6,7 @@
 /*   By: abolea <abolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 13:12:19 by lle-pier          #+#    #+#             */
-/*   Updated: 2024/09/03 12:43:29 by abolea           ###   ########.fr       */
+/*   Updated: 2024/09/03 13:22:50 by abolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ void	use_dda(t_cam *cam);
 void	wall_height(t_cam *cam);
 void	put_wall(t_cam *cam, t_img *img);
 void	draw_px(t_img *img, t_cam *cam, t_mlx *mlx);
-void	create_image(t_img *img, t_mlx *mlx);
+int		create_image(t_img *img, t_mlx *mlx);
 void	put_pixel(t_img *img, int x, int y, int color);
 void	color_floor_and_ceiling(t_img *img, t_cam *cam);
 int		load_textures(t_img *img, t_mlx *mlx, char *filename);
@@ -197,5 +197,7 @@ t_img	*get_dir(t_cam *cam, t_img *img);
 t_cam	*init_argument(t_cub *cub);
 int		init_textures(t_mlx *mlx, t_cub *cub);
 int		handle_exit(t_mlx *mlx);
+void	free_all(t_mlx *mlx, t_cam *cam);
+int		init_mlx(t_mlx *mlx);
 
 #endif
