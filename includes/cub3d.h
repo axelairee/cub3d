@@ -6,7 +6,7 @@
 /*   By: abolea <abolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 13:12:19 by lle-pier          #+#    #+#             */
-/*   Updated: 2024/08/29 15:26:43 by abolea           ###   ########.fr       */
+/*   Updated: 2024/09/03 12:43:29 by abolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,7 @@ typedef struct s_mlx {
 	void	*xpm_ptr;
 	t_cam	*cam;
 	t_img	img;
+	t_cub	cub;
 } t_mlx;
 
 char	*ft_strchr(const char *s, int c);

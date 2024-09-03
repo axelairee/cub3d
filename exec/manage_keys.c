@@ -6,7 +6,7 @@
 /*   By: abolea <abolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 12:43:08 by abolea            #+#    #+#             */
-/*   Updated: 2024/08/29 15:39:46 by abolea           ###   ########.fr       */
+/*   Updated: 2024/09/03 12:45:30 by abolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,71 @@ int	update_position(t_mlx *mlx)
 	return (0);
 }
 
+void free_images(t_img *img, void *mlx_ptr)
+{
+	if (img->north && img->north->tex_ptr)
+	{
+		mlx_destroy_image(mlx_ptr, img->north->tex_ptr);
+		img->north->tex_ptr = NULL;
+	}
+	if (img->south && img->south->tex_ptr)
+	{
+		mlx_destroy_image(mlx_ptr, img->south->tex_ptr);
+		img->south->tex_ptr = NULL;
+	}
+	if (img->east && img->east->tex_ptr)
+	{
+		mlx_destroy_image(mlx_ptr, img->east->tex_ptr);
+		img->east->tex_ptr = NULL;
+	}
+	if (img->west && img->west->tex_ptr)
+	{
+		mlx_destroy_image(mlx_ptr, img->west->tex_ptr);
+		img->west->tex_ptr = NULL;
+	}
+}
+
+void free_ptr(t_img *img, void *mlx_ptr)
+{
+	if (img->img_ptr)
+	{
+		mlx_destroy_image(mlx_ptr, img->img_ptr);
+		img->img_ptr = NULL;
+	}
+	if (img->img_ptr)
+	{
+		mlx_destroy_image(mlx_ptr, img->img_ptr);
+		img->img_ptr = NULL;
+	}
+	free(img->north);
+	free(img->south);
+	free(img->east);
+	free(img->west);
+}
+
 void	free_all(t_mlx *mlx, t_cam *cam)
 {
-	free(mlx->mlx_ptr);	
-	free(cam);
+	if (mlx->win_ptr)
+	{
+		mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
+		mlx->win_ptr = NULL;
+	}
+	free_images(&mlx->img, mlx->mlx_ptr);
+	free_ptr(&mlx->img, mlx->mlx_ptr);
+	if (mlx->mlx_ptr)
+	{
+		mlx_destroy_display(mlx->mlx_ptr);
+		free(mlx->mlx_ptr);
+		mlx->mlx_ptr = NULL;
+	}
+	if (cam)
+		free(cam);
 }
+
 
 int	handle_exit(t_mlx *mlx)
 {
 	free_all(mlx, mlx->cam);
-	mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
 	exit(0);
 	return (0);
 }

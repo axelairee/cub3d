@@ -80,6 +80,12 @@ t_cam	*init_argument(t_cub *cub)
 	cam->is_open = 0;
 	cam->draw_end = SCREEN_H;
 	cam->line_height = SCREEN_H;
+	cam->keys.w = 0;
+	cam->keys.s = 0;
+	cam->keys.a = 0;
+	cam->keys.d = 0;
+	cam->keys.fg = 0;
+	cam->keys.fd = 0;
 	return (cam);
 }
 
