@@ -6,7 +6,7 @@
 /*   By: abolea <abolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 12:43:08 by abolea            #+#    #+#             */
-/*   Updated: 2024/09/03 13:23:30 by abolea           ###   ########.fr       */
+/*   Updated: 2024/09/17 14:54:24 by abolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,13 @@ int	update_position(t_mlx *mlx)
 	if (cam->keys.s)
 		move_backward(cam, cam->map);
 	if (cam->keys.a)
-		move_left(cam, cam->map);
-	if (cam->keys.d)
 		move_right(cam, cam->map);
+	if (cam->keys.d)
+		move_left(cam, cam->map);
 	if (cam->keys.fg)
-		rotate_left(cam);
-	if (cam->keys.fd)
 		rotate_right(cam);
+	if (cam->keys.fd)
+		rotate_left(cam);
 	put_wall(cam, &mlx->img);
 	color_floor_and_ceiling(&mlx->img, cam);
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img.img_ptr, 0, 0);

@@ -6,7 +6,7 @@
 /*   By: abolea <abolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 13:41:52 by abolea            #+#    #+#             */
-/*   Updated: 2024/08/29 13:03:08 by abolea           ###   ########.fr       */
+/*   Updated: 2024/09/17 14:08:32 by abolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	use_dda(t_cam *cam)
 			cam->map_y += cam->step_y;
 			cam->side = 1;
 		}
-		if (cam->map[cam->map_y][cam->map_x] > '0')
+		if (cam->map[cam->map_y][cam->map_x] != '0')
 			hit = 1;
 	}
 }

@@ -17,15 +17,15 @@ void	get_north_and_south(t_cub *cub, t_cam *cam)
 	if (cub->player.direction == 'N')
 	{
 		cam->dir_x = 0;
-		cam->dir_y = -1;
-		cam->plane_x = -0.66;
+		cam->dir_y = -1.01;
+		cam->plane_x = 0.66;
 		cam->plane_y = 0;
 	}
 	else if (cub->player.direction == 'S')
 	{
 		cam->dir_x = 0;
-		cam->dir_y = 1;
-		cam->plane_x = 0.66;
+		cam->dir_y = 1.01;
+		cam->plane_x = -0.66;
 		cam->plane_y = 0;
 	}
 }
@@ -35,17 +35,17 @@ void	get_player_dir(t_cub *cub, t_cam *cam)
 	get_north_and_south(cub, cam);
 	if (cub->player.direction == 'E')
 	{
-		cam->dir_x = 1;
-		cam->dir_y = 0;
-		cam->plane_x = 0;
-		cam->plane_y = -0.66;
-	}
-	else if (cub->player.direction == 'W')
-	{
-		cam->dir_x = -1;
+		cam->dir_x = 1.01;
 		cam->dir_y = 0;
 		cam->plane_x = 0;
 		cam->plane_y = 0.66;
+	}
+	else if (cub->player.direction == 'W')
+	{
+		cam->dir_x = -1.01;
+		cam->dir_y = 0;
+		cam->plane_x = 0;
+		cam->plane_y = -0.66;
 	}
 }
 
