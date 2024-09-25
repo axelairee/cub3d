@@ -105,6 +105,10 @@ int	init_mlx(t_mlx *mlx, t_cub *cub)
 		free(mlx->mlx_ptr);
 		return (-1);
 	}
+	mlx->img.north = NULL;
+	mlx->img.east = NULL;
+	mlx->img.south = NULL;
+	mlx->img.west = NULL;
 	mlx->cub = cub;
 	return (0);
 }

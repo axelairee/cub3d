@@ -3,61 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lle-pier <lle-pier@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lle-pier <lle-pier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 08:34:44 by lle-pier          #+#    #+#             */
-/*   Updated: 2024/07/30 15:58:30 by lle-pier         ###   ########.fr       */
+/*   Updated: 2024/09/24 15:54:12 by lle-pier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	flood_fill(t_cub *data, int x, int y)
+int	check_first_and_last_line(t_cub *c)
 {
-	if (x < 0 || x >= data->map_height || y < 0 || y >= data->map_width \
-	|| data->map[x][y] == ' ' || !data->map[x][y])
-	{
-		return ;
-	}
-	if (data->map[x][y] == '1' || data->map[x][y] == 'V')
-		return ;
-	if (data->map[x][y] == '0')
-		data->map[x][y] = 'V';
-	flood_fill(data, x, y + 1);
-	flood_fill(data, x, y -1);
-	flood_fill(data, x + 1, y);
-	flood_fill(data, x - 1, y);
-}
+	int	i;
+	int	j;
 
-int	unflood_fill(t_cub *data, int x, int y)
-{
-	if (x < 0 || x >= data->map_height || y < 0 || y >= data->map_width \
-	|| data->map[x][y] == ' ' || !data->map[x][y])
+	i = 0;
+	j = 0;
+	while (c->map[i][j])
 	{
-		return (-1);
+		if (c->map[i][j] != '1' && c->map[i][j] != ' ')
+			return (print_error("Map is not closed 1\n"), -1);
+		j++;
 	}
-	if (data->map[x][y] == '1' || data->map[x][y] == '0')
-		return (0);
-	if (data->map[x][y] == 'V')
+	i = c->map_height - 1;
+	j = 0;
+	while (c->map[i][j])
 	{
-		data->map[x][y] = '0';
+		if (c->map[i][j] != '1' && c->map[i][j] != ' ')
+			return (print_error("Map is not closed\n"), -1);
+		j++;
 	}
-	if (unflood_fill(data, x, y + 1) == -1)
-		return (-1);
-	if (unflood_fill(data, x, y -1) == -1)
-		return (-1);
-	if (unflood_fill(data, x + 1, y) == -1)
-		return (-1);
-	if (unflood_fill(data, x - 1, y) == -1)
-		return (-1);
 	return (0);
 }
 
-int	is_map_close(t_cub *c)
+int	check_map_closed(t_cub *c, int i, int j)
 {
-	flood_fill(c, c->player.x, c->player.y);
-	if (unflood_fill(c, c->player.x, c->player.y) == -1)
-		return (print_cube(c), printf("map not closed !!!\n"), -1);
+	if (check_first_and_last_line(c) == -1)
+		return (-1);
+	while (c->map[i])
+	{
+		j = 1;
+		while (c->map[i][j])
+		{
+			if (c->map[i][j] == '0' || c->map[i][j] == 'N' || \
+			c->map[i][j] == 'S' || c->map[i][j] == 'E' || \
+			c->map[i][j] == 'W')
+			{
+				if (c->map[i][j + 1] == ' ' || c->map[i][j - 1] == ' ' \
+				|| c->map[i + 1][j] == ' ' || c->map[i - 1][j] == ' ')
+					return (print_error("Map is not closed\n"), -1);
+				if (c->map[i][j + 1] == '\0' || c->map[i][j - 1] == '\0' \
+				|| c->map[i + 1][j] == '\0' || c->map[i - 1][j] == '\0')
+					return (print_error("Map is not closed\n"), -1);
+			}
+			j++;
+		}
+		i++;
+	}
 	return (0);
 }
-

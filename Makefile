@@ -7,6 +7,11 @@ SRCS			=   parsing/check_map.c \
 					parsing/utils.c \
 					parsing/flood_fill.c \
 					parsing/extract_rgb.c \
+					parsing/fill_map_utils.c \
+					parsing/libft.c \
+					parsing/get_next_line.c \
+					parsing/get_next_line_utils.c \
+					parsing/path.c \
 					exec/exec_main.c \
 					exec/raycasting.c \
 					exec/texture.c \
@@ -31,7 +36,7 @@ MLX_FILE		=	minilibx-linux/libmlx.a
 MLX_FLAG		=	-Iminilibx-linux -Lminilibx-linux -lmlx -lX11 -lXext -lm
 
 
-.build/%.o: %.c
+.build/%.o: %.c includes/cub3d.h
 				@mkdir -p $(dir $@)
 				@$(CC) $(CFLAGS) $(HEAD) -c $< -o $@
 

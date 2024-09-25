@@ -6,7 +6,7 @@
 /*   By: abolea <abolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 12:46:38 by abolea            #+#    #+#             */
-/*   Updated: 2024/08/29 13:22:02 by abolea           ###   ########.fr       */
+/*   Updated: 2024/09/25 11:46:33 by abolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ int	draw_calcul(t_cam *cam, t_img *wall_dir)
 		cam->wall_x = cam->pos_x + cam->wall_dist * cam->ray_dir_x;
 	cam->wall_x -= floor(cam->wall_x);
 	tex_x = (int)(cam->wall_x * (double)wall_dir->tex_width);
-	if (cam->side == 0 && cam->ray_dir_x > 0)
+	if (cam->side == 0 && cam->ray_dir_x < 0)
 		tex_x = wall_dir->tex_width - tex_x - 1;
-	if (cam->side == 1 && cam->ray_dir_y < 0)
+	if (cam->side == 1 && cam->ray_dir_y > 0)
 		tex_x = wall_dir->tex_width - tex_x - 1;
 	return (tex_x);
 }

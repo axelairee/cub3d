@@ -6,7 +6,7 @@
 /*   By: abolea <abolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 13:12:19 by lle-pier          #+#    #+#             */
-/*   Updated: 2024/09/03 14:18:41 by abolea           ###   ########.fr       */
+/*   Updated: 2024/09/25 16:22:56 by abolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@
 # include <string.h>
 # include "../minilibx-linux/mlx.h"
 # include <math.h>
+# include <limits.h>
 
-# define BUFFER_SIZE 1024
+# define BUFFER_SIZE 10
 # define SCREEN_W 1200
 # define SCREEN_H 900
 
@@ -38,12 +39,16 @@ typedef struct s_cub
 {
 	char	*no;
 	int		no_state;
+	int		fd_no;
 	char	*so;
 	int		so_state;
+	int		fd_so;
 	char	*we;
 	int		we_state;
+	int		fd_we;
 	char	*ea;
 	int		ea_state;
+	int		fd_ea;
 	char	*floor;
 	int		r_floor;
 	int		g_floor;
@@ -83,6 +88,15 @@ typedef struct s_img
 	struct s_img	*east;
 	struct s_img	*west;
 }	t_img;
+
+typedef struct reader
+{
+	ssize_t	bytes_read;
+	char	buffer[BUFFER_SIZE];
+	char	*line;
+	char	*end_of_line;
+	char	*map_temp;
+}	t_reader;
 
 typedef enum e_cardinal_direction
 {
@@ -169,7 +183,7 @@ int		fill_cub_structure(t_cub *cub, const char *filename);
 char	**ft_split(char *s, char c);
 char	*ft_strdup(const char *s);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
-int		is_map_close(t_cub *c);
+int		check_map_closed(t_cub *c, int i, int j);
 char	*ft_strsub(char *s, unsigned int start, size_t len);
 char	*ft_strjoin(char *s1, char *s2);
 void	print_cube(t_cub *cub);
@@ -202,7 +216,23 @@ t_img	*get_dir(t_cam *cam, t_img *img);
 t_cam	*init_argument(t_cub *cub);
 int		init_textures(t_mlx *mlx, t_cub *cub);
 int		handle_exit(t_mlx *mlx);
-void	free_all(t_mlx *mlx, t_cam *cam);
+void	free_all(t_mlx *mlx, t_cam *cam, int i);
 int		init_mlx(t_mlx *mlx, t_cub *cub);
+int		compare_strings(const char *str1, const char *str2);
+int		compare_textures(t_cub *cub);
+int		open_file(const char *filename);
+void	count_dimensions(t_cub *cub);
+int		check_param_completed(t_cub *cub);
+int		check_buffer(void);
+char	*get_next_line(int fd);
+char	*ft_free(char **str);
+size_t	ft_strlen_gnl(const char *s);
+char	*ft_charrchr(const char *s, int c);
+char	*ft_substr(char *s, unsigned int start, size_t len);
+char	*ft_strjoin_gnl(char *s1, char *s2);
+int		test_path(t_cub *cub);
+int		get_player_position(t_cub *c, int x, int y);
+void	read_till_end_of_file(int fd);
+int		ft_strcmp(const char *s1, const char *s2);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: abolea <abolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:06:20 by abolea            #+#    #+#             */
-/*   Updated: 2024/09/03 13:22:25 by abolea           ###   ########.fr       */
+/*   Updated: 2024/09/25 16:51:13 by abolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,25 +56,25 @@ int	init_textures(t_mlx *mlx, t_cub *cub)
 {
 	mlx->img.north = malloc(sizeof(t_img));
 	if (!mlx->img.north)
-		return (-1);
+		return (-2);
 	mlx->img.south = malloc(sizeof(t_img));
-	if (!mlx->img.north)
-		return (-1);
+	if (!mlx->img.south)
+		return (-2);
 	mlx->img.east = malloc(sizeof(t_img));
-	if (!mlx->img.north)
-		return (-1);
+	if (!mlx->img.east)
+		return (-2);
 	mlx->img.west = malloc(sizeof(t_img));
-	if (!mlx->img.north)
-		return (-1);
+	if (!mlx->img.west)
+		return (-2);
 	if (!mlx->img.north || !mlx->img.south || !mlx->img.east || !mlx->img.west)
-		return (-1);
+		return (-2);
 	if (load_textures(mlx->img.north, mlx, cub->no) == -1)
-		return (-1);
+		return (-2);
 	if (load_textures(mlx->img.south, mlx, cub->so) == -1)
 		return (-1);
 	if (load_textures(mlx->img.east, mlx, cub->ea) == -1)
-		return (-1);
+		return (-3);
 	if (load_textures(mlx->img.west, mlx, cub->we) == -1)
-		return (-1);
+		return (-4);
 	return (0);
 }
