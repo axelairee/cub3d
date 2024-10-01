@@ -6,7 +6,7 @@
 /*   By: lle-pier <lle-pier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:03:39 by lle-pier          #+#    #+#             */
-/*   Updated: 2024/09/23 14:44:53 by lle-pier         ###   ########.fr       */
+/*   Updated: 2024/09/30 11:51:42 by lle-pier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ char	*ft_reader(int fd, char *memo)
 		{
 			buffer[ret] = '\0';
 			memo = ft_strjoin_gnl(memo, buffer);
+			if (!memo)
+				return (ft_free(&buffer));
 		}
 	}
 	free(buffer);

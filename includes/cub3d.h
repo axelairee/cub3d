@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abolea <abolea@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lle-pier <lle-pier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 13:12:19 by lle-pier          #+#    #+#             */
-/*   Updated: 2024/09/25 16:22:56 by abolea           ###   ########.fr       */
+/*   Updated: 2024/09/30 13:10:08 by lle-pier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <errno.h>
-# include <string.h>
 # include "../minilibx-linux/mlx.h"
 # include <math.h>
 # include <limits.h>
@@ -62,6 +61,7 @@ typedef struct s_cub
 	char	**map;
 	int		map_width;
 	int		map_height;
+	int		lines_read;
 	t_pos	player;
 }			t_cub;
 
@@ -88,15 +88,6 @@ typedef struct s_img
 	struct s_img	*east;
 	struct s_img	*west;
 }	t_img;
-
-typedef struct reader
-{
-	ssize_t	bytes_read;
-	char	buffer[BUFFER_SIZE];
-	char	*line;
-	char	*end_of_line;
-	char	*map_temp;
-}	t_reader;
 
 typedef enum e_cardinal_direction
 {
@@ -179,7 +170,7 @@ int		check_first_param(int linesRead, \
 ssize_t bytesRead, int fd, char *buffer);
 int		process_line(t_cub *cub, const char *line);
 void	process_map_line(t_cub *cub, const char *line, int row);
-int		fill_cub_structure(t_cub *cub, const char *filename);
+int		fill_cub_structure(t_cub *cub, const char *filename, char *line);
 char	**ft_split(char *s, char c);
 char	*ft_strdup(const char *s);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -234,5 +225,7 @@ int		test_path(t_cub *cub);
 int		get_player_position(t_cub *c, int x, int y);
 void	read_till_end_of_file(int fd);
 int		ft_strcmp(const char *s1, const char *s2);
+int		struct_completed(t_cub *cub);
+void	malloc_error(char *to_free, int i, int fd);
 
 #endif

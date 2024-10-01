@@ -6,7 +6,7 @@
 /*   By: lle-pier <lle-pier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 13:49:30 by lle-pier          #+#    #+#             */
-/*   Updated: 2024/09/24 16:30:59 by lle-pier         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:45:11 by lle-pier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,12 @@ int	check_param_completed(t_cub *cub)
 	|| !cub->floor_state || !cub->ceiling_state)
 		return (0);
 	return (1);
+}
+
+int	struct_completed(t_cub *cub)
+{
+	if (cub->no_state && cub->so_state && cub->we_state && cub->ea_state \
+	&& cub->floor_state && cub->ceiling_state)
+		return (1);
+	return (0);
 }

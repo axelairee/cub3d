@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abolea <abolea@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lle-pier <lle-pier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 12:41:28 by lle-pier          #+#    #+#             */
-/*   Updated: 2024/09/25 16:10:28 by abolea           ###   ########.fr       */
+/*   Updated: 2024/09/30 13:09:52 by lle-pier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,17 @@ void	free_cube(t_cub *cub)
 	free(cub->map);
 }
 
+void	malloc_error(char *to_free, int i, int fd)
+{
+	free(to_free);
+	close(fd);
+	if (i == 1)
+		print_error("Error: malloc error\n");
+	else
+		print_error("Error: invalid line on map\n");
+	read_till_end_of_file(fd);
+}
+
 int	basic_errors(char *filename)
 {
 	if (is_cub_file(filename) == 0)
@@ -65,7 +76,7 @@ int	main(int argc, char *argv[])
 	cub.map = NULL;
 	if (check_buffer() == 1 || basic_errors(filename) == 1)
 		return (1);
-	if (fill_cub_structure(&cub, filename) != 0)
+	if (fill_cub_structure(&cub, filename, NULL) != 0)
 		return (free_cube(&cub), \
 		print_error("Error when filling structure\n"), 1);
 	if (check_map_closed(&cub, 1, 1) == -1)

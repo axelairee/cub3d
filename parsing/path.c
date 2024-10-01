@@ -6,7 +6,7 @@
 /*   By: lle-pier <lle-pier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 15:58:54 by lle-pier          #+#    #+#             */
-/*   Updated: 2024/09/25 13:15:30 by lle-pier         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:10:21 by lle-pier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*get_path(char *line)
 
 	path = malloc(sizeof(char) * ft_strlen(line) + 1);
 	if (!path)
-		return (NULL);
+		return (free(line), NULL);
 	i = 0;
 	j = 0;
 	while (line[i] == ' ')
@@ -53,12 +53,27 @@ char	*get_path(char *line)
 	return (path);
 }
 
-int	test_path(t_cub *cub)
+int	assign_path(t_cub *cub)
 {
 	cub->no = get_path(cub->no);
+	if (!cub->no)
+		return (1);
 	cub->so = get_path(cub->so);
+	if (!cub->so)
+		return (free(cub->no), 1);
 	cub->we = get_path(cub->we);
+	if (!cub->we)
+		return (free(cub->no), free(cub->so), 1);
 	cub->ea = get_path(cub->ea);
+	if (!cub->ea)
+		return (free(cub->no), free(cub->so), free(cub->we), 1);
+	return (0);
+}
+
+int	test_path(t_cub *cub)
+{
+	if (assign_path(cub))
+		return (1);
 	if (compare_textures(cub))
 		return (1);
 	cub->fd_no = open(cub->no, O_RDONLY);

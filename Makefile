@@ -1,4 +1,4 @@
-NAME			=   cub3d
+NAME			=   cub3D
 
 SRCS			=   parsing/check_map.c \
 					parsing/fill_struct.c \
